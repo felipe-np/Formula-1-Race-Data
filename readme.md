@@ -10,8 +10,8 @@ Link dataset: https://www.kaggle.com/datasets/rohanrao/formula-1-world-champions
 
 
 ## Visualização Geral
-![Capa do Dashboard](assets\Print_landingpage_readme.jpg)
-![Drivers](assets\Print_drivers_readme.jpg)
-![Teams](assets\Print_teams_readme.jpg)
-![Seasons](assets\Print_seasons_readme.jpg)
-![Circuits](assets\Print_circuits_readme.jpg)
+![Landing Page](https://github.com/user-attachments/assets/ff78ec17-e781-477a-9d5b-31a57e6305c7)
+![Drivers](https://github.com/user-attachments/assets/98b0764a-b49e-495b-a487-f1bc6c213b5e)
+![Teams](https://github.com/user-attachments/assets/694bab99-e39c-4ddc-a67b-82fdd3c26d15)
+![Seasons](https://github.com/user-attachments/assets/b2cb8302-4eb9-41ed-9d56-f4780585e56e)
+![Circuits](https://github.com/user-attachments/assets/ecd7ca72-886c-4b62-a974-205796969fad)
