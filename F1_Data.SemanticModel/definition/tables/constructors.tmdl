@@ -1,0 +1,56 @@
+table constructors
+	lineageTag: 74a75c15-0a48-4dce-be68-7c5ba838ce90
+
+	column constructorId
+		dataType: int64
+		formatString: 0
+		lineageTag: 730a3b7d-213d-428b-8774-d38038a7b5eb
+		summarizeBy: none
+		sourceColumn: constructorId
+
+		annotation SummarizationSetBy = Automatic
+
+	column constructorRef
+		dataType: string
+		lineageTag: e6b16ca6-f26a-4a10-9a7f-c91f9855bc0f
+		summarizeBy: none
+		sourceColumn: constructorRef
+
+		annotation SummarizationSetBy = Automatic
+
+	column name
+		dataType: string
+		lineageTag: 80e2470c-fe7c-485a-bae9-1ada1b647e6c
+		summarizeBy: none
+		sourceColumn: name
+
+		annotation SummarizationSetBy = Automatic
+
+	column nationality
+		dataType: string
+		lineageTag: 58ef8169-746e-4016-8ece-86f730fccac3
+		summarizeBy: none
+		sourceColumn: nationality
+
+		annotation SummarizationSetBy = Automatic
+
+	column url
+		dataType: string
+		lineageTag: efad71c6-e9e5-4aad-bb0b-845e180e7c45
+		summarizeBy: none
+		sourceColumn: url
+
+		annotation SummarizationSetBy = Automatic
+
+	partition constructors = m
+		mode: import
+		source =
+				let
+				    Fonte = Csv.Document(File.Contents("D:\Study\Portfolio_BI\Formula 1 Race Data\dataset\constructors.csv"),[Delimiter=",", Columns=5, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+				    #"Cabeçalhos Promovidos" = Table.PromoteHeaders(Fonte, [PromoteAllScalars=true]),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(#"Cabeçalhos Promovidos",{{"constructorId", Int64.Type}, {"constructorRef", type text}, {"name", type text}, {"nationality", type text}, {"url", type text}})
+				in
+				    #"Tipo Alterado"
+
+	annotation PBI_ResultType = Table
+

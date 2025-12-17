@@ -1,0 +1,175 @@
+table 'Driver Metrics'
+	lineageTag: 92bcc304-8ce0-4dd3-bbb6-3261d269ad6f
+
+	measure 'Total Wins' =
+			
+			CALCULATE(
+			    COUNTROWS(results),
+			    results[positionOrder] = 1
+			)
+		formatString: 0
+		lineageTag: f276b48e-3707-44ca-a1dc-9313aa728f9e
+
+	measure 'Win %' = ```
+			
+			VAR TotalVictories = [Total Wins]
+			VAR TotalStarts = 
+			    CALCULATE(
+			        COUNTROWS(results),
+			        results[grid] > 0 -- To filter only winners
+			    )
+			RETURN
+			    DIVIDE(TotalVictories, TotalStarts, 0)
+			```
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 44f85d1e-be91-42d9-bc6f-97fb385eb46e
+
+	measure 'Total Podiums' =
+			
+			CALCULATE(
+			    COUNTROWS(results),
+			    results[positionOrder] <= 3
+			)
+		formatString: 0
+		lineageTag: 487cf8d3-b414-4f21-8717-f7ae0157ec78
+
+	measure 'Total Poles' =
+			
+			CALCULATE(
+			    COUNTROWS(results),
+			    results[grid] = 1
+			)
+		formatString: 0
+		lineageTag: 3d44ddf5-c8a4-480a-b72e-800273b3fce4
+
+	measure 'Podium %' = ```
+			
+			VAR TotalPodiums = [Total Podiums]
+			VAR TotalStarts = 
+			    CALCULATE(
+			        COUNTROWS(results),
+			        results[grid] > 0  -- To filter those who started
+			    )
+			RETURN
+			    DIVIDE(TotalPodiums, TotalStarts, 0)
+			```
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 833eea15-da21-4186-b53b-2c8d2f2642e6
+
+	measure 'Pole %' = ```
+			
+			VAR TotalPoles = [Total Poles]
+			VAR TotalRaces = 
+			    CALCULATE(
+			        DISTINCTCOUNT(results[raceId]), -- Counts only once for race
+			        results[grid] > 0 -- To filter those who actually started
+			    )
+			RETURN
+			    DIVIDE(TotalPoles, TotalRaces, 0)
+			```
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 716e7983-2c21-4ced-9b9d-3ed68061c70f
+
+	measure 'GP Starts' =
+			
+			CALCULATE(
+			    COUNTROWS(results),
+			    NOT ( results[positionText] IN { "W", "F", "E" } )
+			)
+		formatString: 0
+		lineageTag: a274af04-43dd-49cc-9616-1c46a521eae5
+
+	measure 'Total DNF' =
+			
+			CALCULATE(
+			    COUNTROWS(results),
+			    results[positionText] IN { "R", "D", "E", "N", "W" }
+			)
+		formatString: 0
+		lineageTag: 0b212465-c802-40f1-bb96-b7b62988f279
+
+	measure '% DNF' = ```
+			
+			VAR TotalAbandonos = [Total DNF]
+			VAR TotalLargadas = 
+			    CALCULATE(
+			        COUNTROWS(results)
+			    )
+			RETURN
+			    DIVIDE(TotalAbandonos, TotalLargadas, 0)
+			```
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: b4daabe0-4e2e-47e1-8bf0-b970e6febb10
+
+	measure 'Total Titles' = ```
+			
+			VAR LastRaces = 
+			    CALCULATETABLE(
+			        VALUES(races[raceId]),
+			        FILTER(
+			            ALL(races),
+			            races[round] = CALCULATE(MAX(races[round]), ALLEXCEPT(races, races[year]))
+			        )
+			    )
+			
+			RETURN
+			    CALCULATE(
+			        COUNTROWS(driver_standings),
+			        driver_standings[position] = 1,  
+			        driver_standings[raceId] IN LastRaces 
+			    )
+			```
+		formatString: 0
+		lineageTag: 263d7dd7-54d7-4c81-9c5b-a3fe3146bdb5
+
+	measure 'Points Finish %' = ```
+			
+			VAR PointsInRaces = 
+			    CALCULATE(
+			        COUNTROWS(results),
+			        results[points] > 0  -- Got points
+			    )
+			VAR TotalStarts = [GP Starts] 
+			RETURN
+			    DIVIDE(PointsInRaces, TotalStarts, 0)
+			```
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 08d2a8a7-a588-43bc-8eb2-80aca25dde38
+
+	measure 'Total Drivers' = DISTINCTCOUNT(results[driverId])
+		formatString: 0
+		lineageTag: b782a435-8819-47b6-b5bf-21902c35cf57
+
+	measure 'Total Races' =
+			
+			CALCULATE(
+			    COUNTROWS(results),
+			    NOT ( results[positionText] IN { "W", "F", "E" } )
+			)
+		formatString: 0
+		lineageTag: 31cdc582-c895-4f4f-bc5e-056b9fbd4172
+
+	measure 'Official Championship Pos' =
+			
+			VAR LastRaceOfTheYear = MAX(races[round])
+			RETURN
+			CALCULATE(
+			    MIN(driver_standings[position]),
+			    races[round] = LastRaceOfTheYear
+			)
+		lineageTag: 925189aa-0399-446f-a90d-92bff450bb76
+
+		formatStringDefinition = "0""º"
+
+	partition 'Driver Metrics' = m
+		mode: import
+		source =
+				let
+				    Fonte = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i45WCkssTs5Xio0FAA==", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [#"Coluna 1" = _t]),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(Fonte,{{"Coluna 1", type text}}),
+				    #"Colunas Removidas" = Table.RemoveColumns(#"Tipo Alterado",{"Coluna 1"})
+				in
+				    #"Colunas Removidas"
+
+	annotation PBI_ResultType = Table
+

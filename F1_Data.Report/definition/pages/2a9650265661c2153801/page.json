@@ -1,0 +1,154 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/2.0.0/schema.json",
+  "name": "2a9650265661c2153801",
+  "displayName": "SEASONS",
+  "displayOption": "FitToPage",
+  "height": 720,
+  "width": 1280,
+  "objects": {
+    "outspace": [
+      {
+        "properties": {
+          "image": {
+            "image": {
+              "name": {
+                "expr": {
+                  "Literal": {
+                    "Value": "''"
+                  }
+                }
+              },
+              "url": {
+                "expr": {
+                  "Literal": {
+                    "Value": "''"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    ],
+    "background": [
+      {
+        "properties": {
+          "image": {
+            "image": {
+              "name": {
+                "expr": {
+                  "Literal": {
+                    "Value": "'TEMPORADAS.png'"
+                  }
+                }
+              },
+              "url": {
+                "expr": {
+                  "ResourcePackageItem": {
+                    "PackageName": "RegisteredResources",
+                    "PackageType": 1,
+                    "ItemName": "TEMPORADAS37047760344652936.png"
+                  }
+                }
+              },
+              "scaling": {
+                "expr": {
+                  "Literal": {
+                    "Value": "'Fill'"
+                  }
+                }
+              }
+            }
+          },
+          "transparency": {
+            "expr": {
+              "Literal": {
+                "Value": "0D"
+              }
+            }
+          },
+          "color": {
+            "solid": {
+              "color": {
+                "expr": {
+                  "ThemeDataColor": {
+                    "ColorId": 1,
+                    "Percent": 0
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    ]
+  },
+  "visibility": "HiddenInViewMode",
+  "visualInteractions": [
+    {
+      "source": "0e5f02a9b1472763ec82",
+      "target": "07c83a3e466dcbea4cf0",
+      "type": "NoFilter"
+    },
+    {
+      "source": "0e5f02a9b1472763ec82",
+      "target": "8308b8fb0acc1bcff233",
+      "type": "NoFilter"
+    },
+    {
+      "source": "a91fef7968a260432cae",
+      "target": "8308b8fb0acc1bcff233",
+      "type": "NoFilter"
+    },
+    {
+      "source": "a91fef7968a260432cae",
+      "target": "07c83a3e466dcbea4cf0",
+      "type": "NoFilter"
+    },
+    {
+      "source": "a91fef7968a260432cae",
+      "target": "1e2d5dcde3595b872f8d",
+      "type": "NoFilter"
+    },
+    {
+      "source": "a91fef7968a260432cae",
+      "target": "ad2ab9d1936c760c0368",
+      "type": "NoFilter"
+    },
+    {
+      "source": "a91fef7968a260432cae",
+      "target": "af8fa0d1ebcd04a28f7d",
+      "type": "DataFilter"
+    },
+    {
+      "source": "0e5f02a9b1472763ec82",
+      "target": "1e2d5dcde3595b872f8d",
+      "type": "NoFilter"
+    },
+    {
+      "source": "0e5f02a9b1472763ec82",
+      "target": "ad2ab9d1936c760c0368",
+      "type": "NoFilter"
+    },
+    {
+      "source": "0e5f02a9b1472763ec82",
+      "target": "af8fa0d1ebcd04a28f7d",
+      "type": "NoFilter"
+    },
+    {
+      "source": "0e5f02a9b1472763ec82",
+      "target": "1d7b63bbde08deee6ba9",
+      "type": "NoFilter"
+    },
+    {
+      "source": "0e5f02a9b1472763ec82",
+      "target": "2adef6b23c26b8bdfe93",
+      "type": "NoFilter"
+    },
+    {
+      "source": "0e5f02a9b1472763ec82",
+      "target": "a91fef7968a260432cae",
+      "type": "NoFilter"
+    }
+  ]
+}

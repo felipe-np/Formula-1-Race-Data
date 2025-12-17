@@ -1,0 +1,129 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/report/3.0.0/schema.json",
+  "themeCollection": {
+    "baseTheme": {
+      "name": "CY25SU11",
+      "reportVersionAtImport": {
+        "visual": "2.4.0",
+        "report": "3.0.0",
+        "page": "2.3.0"
+      },
+      "type": "SharedResources"
+    },
+    "customTheme": {
+      "name": "Solar",
+      "reportVersionAtImport": {
+        "visual": "2.4.0",
+        "report": "3.0.0",
+        "page": "2.3.0"
+      },
+      "type": "SharedResources"
+    }
+  },
+  "objects": {
+    "section": [
+      {
+        "properties": {
+          "verticalAlignment": {
+            "expr": {
+              "Literal": {
+                "Value": "'Top'"
+              }
+            }
+          }
+        }
+      }
+    ],
+    "outspacePane": [
+      {
+        "properties": {
+          "visible": {
+            "expr": {
+              "Literal": {
+                "Value": "false"
+              }
+            }
+          },
+          "expanded": {
+            "expr": {
+              "Literal": {
+                "Value": "true"
+              }
+            }
+          }
+        }
+      }
+    ]
+  },
+  "publicCustomVisuals": [
+    "htmlContent443BE3AD55E043BF878BED274D3A6855",
+    "wishyoulizationbarchartrace"
+  ],
+  "resourcePackages": [
+    {
+      "name": "SharedResources",
+      "type": "SharedResources",
+      "items": [
+        {
+          "name": "CY25SU11",
+          "path": "BaseThemes/CY25SU11.json",
+          "type": "BaseTheme"
+        },
+        {
+          "name": "Solar",
+          "path": "BuiltInThemes/Solar.json",
+          "type": "CustomTheme"
+        }
+      ]
+    },
+    {
+      "name": "RegisteredResources",
+      "type": "RegisteredResources",
+      "items": [
+        {
+          "name": "Landing_Page30501828411300846.png",
+          "path": "Landing_Page30501828411300846.png",
+          "type": "Image"
+        },
+        {
+          "name": "TEMPORADAS37047760344652936.png",
+          "path": "TEMPORADAS37047760344652936.png",
+          "type": "Image"
+        },
+        {
+          "name": "PILOTOS6269558675355875.png",
+          "path": "PILOTOS6269558675355875.png",
+          "type": "Image"
+        },
+        {
+          "name": "EQUIPES44924392786989487.png",
+          "path": "EQUIPES44924392786989487.png",
+          "type": "Image"
+        },
+        {
+          "name": "CIRCUITOS30634403962420487.png",
+          "path": "CIRCUITOS30634403962420487.png",
+          "type": "Image"
+        },
+        {
+          "name": "DRIVER_PROFILE14280978300001834.png",
+          "path": "DRIVER_PROFILE14280978300001834.png",
+          "type": "Image"
+        },
+        {
+          "name": "TEAM_PROFILE9338074143043888.png",
+          "path": "TEAM_PROFILE9338074143043888.png",
+          "type": "Image"
+        }
+      ]
+    }
+  ],
+  "settings": {
+    "useStylableVisualContainerHeader": true,
+    "exportDataMode": "AllowSummarized",
+    "defaultDrillFilterOtherVisuals": true,
+    "allowChangeFilterTypes": true,
+    "useEnhancedTooltips": true,
+    "useDefaultAggregateDisplayName": true
+  }
+}

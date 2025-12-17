@@ -1,0 +1,182 @@
+table races
+	lineageTag: 8b71d517-4bbe-421b-a04f-ca41bdc1c4e7
+
+	column raceId
+		dataType: int64
+		formatString: 0
+		lineageTag: 5c60daf0-917e-4dc9-ba69-86db9a03ba58
+		summarizeBy: none
+		sourceColumn: raceId
+
+		annotation SummarizationSetBy = Automatic
+
+	column year
+		dataType: int64
+		formatString: 0
+		lineageTag: 8e992fb5-2833-4e97-903d-b8ff83939b74
+		summarizeBy: none
+		sourceColumn: year
+
+		annotation SummarizationSetBy = Automatic
+
+	column round
+		dataType: int64
+		formatString: 0
+		lineageTag: 40e2e7e6-e9d8-4b93-91b3-a69ed9f3b64b
+		summarizeBy: sum
+		sourceColumn: round
+
+		annotation SummarizationSetBy = Automatic
+
+	column circuitId
+		dataType: int64
+		formatString: 0
+		lineageTag: b19bcb62-5b2f-4a5a-8b8c-fbd6d73ea073
+		summarizeBy: none
+		sourceColumn: circuitId
+
+		annotation SummarizationSetBy = Automatic
+
+	column name
+		dataType: string
+		lineageTag: 9fb215f7-ec75-4751-bc06-2f46130b1f7b
+		summarizeBy: none
+		sourceColumn: name
+
+		annotation SummarizationSetBy = Automatic
+
+	column date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: b00c369f-1745-46a0-bfe6-29e2a3dc879f
+		summarizeBy: none
+		sourceColumn: date
+
+		variation Variation
+			isDefault
+			relationship: 1e612e6f-53fc-4ea4-b65b-77ed76700bfe
+			defaultHierarchy: LocalDateTable_1d261d15-18d8-404c-bf03-3bfe451f81d8.'Hierarquia de datas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column time
+		dataType: string
+		lineageTag: 6be6f9c8-f351-4981-ac53-b65f076d2a40
+		summarizeBy: none
+		sourceColumn: time
+
+		annotation SummarizationSetBy = Automatic
+
+	column url
+		dataType: string
+		lineageTag: 2b2c5d41-18dc-46a2-8115-3d2e1e3bfc3e
+		summarizeBy: none
+		sourceColumn: url
+
+		annotation SummarizationSetBy = Automatic
+
+	column fp1_date
+		dataType: string
+		lineageTag: dcd0bebd-e3b0-4587-a814-bf726b3fe402
+		summarizeBy: none
+		sourceColumn: fp1_date
+
+		annotation SummarizationSetBy = Automatic
+
+	column fp1_time
+		dataType: string
+		lineageTag: 53792890-9d8d-49dc-8db0-7849721c8d3b
+		summarizeBy: none
+		sourceColumn: fp1_time
+
+		annotation SummarizationSetBy = Automatic
+
+	column fp2_date
+		dataType: string
+		lineageTag: 1728cd25-877e-4064-bd5b-00d3141b965f
+		summarizeBy: none
+		sourceColumn: fp2_date
+
+		annotation SummarizationSetBy = Automatic
+
+	column fp2_time
+		dataType: string
+		lineageTag: 3fe54290-464a-49d6-b941-ae2c3b5a4f9b
+		summarizeBy: none
+		sourceColumn: fp2_time
+
+		annotation SummarizationSetBy = Automatic
+
+	column fp3_date
+		dataType: string
+		lineageTag: 9cc46d35-c9c0-4830-9368-ffa9340bff95
+		summarizeBy: none
+		sourceColumn: fp3_date
+
+		annotation SummarizationSetBy = Automatic
+
+	column fp3_time
+		dataType: string
+		lineageTag: c0b5fcad-fe89-4242-8b41-16df61030a55
+		summarizeBy: none
+		sourceColumn: fp3_time
+
+		annotation SummarizationSetBy = Automatic
+
+	column quali_date
+		dataType: string
+		lineageTag: 72b8c85c-e32c-4aa4-a617-c020498b3164
+		summarizeBy: none
+		sourceColumn: quali_date
+
+		annotation SummarizationSetBy = Automatic
+
+	column quali_time
+		dataType: string
+		lineageTag: c40df1dc-86d1-4c93-863e-979a84f465fa
+		summarizeBy: none
+		sourceColumn: quali_time
+
+		annotation SummarizationSetBy = Automatic
+
+	column sprint_date
+		dataType: string
+		lineageTag: 78909628-c962-4f12-aa5a-d97f28b138c4
+		summarizeBy: none
+		sourceColumn: sprint_date
+
+		annotation SummarizationSetBy = Automatic
+
+	column sprint_time
+		dataType: string
+		lineageTag: 2a826b08-3f2e-42d9-9c0e-2c40b2716f03
+		summarizeBy: none
+		sourceColumn: sprint_time
+
+		annotation SummarizationSetBy = Automatic
+
+	column Short_Name = SUBSTITUTE(races[name], " Grand Prix", "")
+		lineageTag: 78a84b09-2228-4322-a487-4d78bc6862c9
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	partition races = m
+		mode: import
+		source =
+				let
+				    Fonte = Csv.Document(File.Contents("D:\Study\Portfolio_BI\Formula 1 Race Data\dataset\races.csv"),[Delimiter=",", Columns=18, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    #"Cabeçalhos Promovidos" = Table.PromoteHeaders(Fonte, [PromoteAllScalars=true]),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(#"Cabeçalhos Promovidos",{{"raceId", Int64.Type}, {"year", Int64.Type}, {"round", Int64.Type}, {"circuitId", Int64.Type}, {"name", type text}, {"date", type date}, {"time", type text}, {"url", type text}, {"fp1_date", type text}, {"fp1_time", type text}, {"fp2_date", type text}, {"fp2_time", type text}, {"fp3_date", type text}, {"fp3_time", type text}, {"quali_date", type text}, {"quali_time", type text}, {"sprint_date", type text}, {"sprint_time", type text}}),
+				    #"Valor Substituído" = Table.ReplaceValue(#"Tipo Alterado","\N","",Replacer.ReplaceText,{"fp1_date", "fp1_time", "fp2_date", "fp2_time", "fp3_date", "fp3_time", "quali_date", "quali_time", "sprint_date", "sprint_time"}),
+				    #"Valor Substituído1" = Table.ReplaceValue(#"Valor Substituído","\N","",Replacer.ReplaceText,{"time"}),
+				    #"Valor Substituído2" = Table.ReplaceValue(#"Valor Substituído1","SÃ£o Paulo Grand Prix","São Paulo Grand Prix",Replacer.ReplaceText,{"name"})
+				in
+				    #"Valor Substituído2"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navegação
+

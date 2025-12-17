@@ -1,0 +1,99 @@
+table circuits
+	lineageTag: 0712897f-fede-493b-afc4-7a79e19c6a56
+
+	column circuitId
+		dataType: int64
+		formatString: 0
+		lineageTag: 26a181a8-6819-416e-b638-e40ec0446d38
+		summarizeBy: none
+		sourceColumn: circuitId
+
+		annotation SummarizationSetBy = Automatic
+
+	column circuitRef
+		dataType: string
+		lineageTag: 22fb6deb-9728-4e62-8355-d740b9581bb9
+		summarizeBy: none
+		sourceColumn: circuitRef
+
+		annotation SummarizationSetBy = Automatic
+
+	column name
+		dataType: string
+		lineageTag: d65d640a-0e31-44f7-a7e0-227d533f368e
+		summarizeBy: none
+		sourceColumn: name
+
+		annotation SummarizationSetBy = Automatic
+
+	column location
+		dataType: string
+		lineageTag: e77465c6-7bdb-4278-8b2e-6454b415a9c5
+		summarizeBy: none
+		sourceColumn: location
+
+		annotation SummarizationSetBy = Automatic
+
+	column country
+		dataType: string
+		lineageTag: 1334fbdc-e26a-4836-9bbf-8afa7f26bb36
+		summarizeBy: none
+		sourceColumn: country
+
+		annotation SummarizationSetBy = Automatic
+
+	column lat
+		dataType: double
+		formatString: 0
+		lineageTag: 30aaf257-48ed-40cc-bf8f-fd7a15e859fb
+		dataCategory: Latitude
+		summarizeBy: none
+		sourceColumn: lat
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	column lng
+		dataType: double
+		formatString: 0
+		lineageTag: d4438acb-3c12-477e-a552-0b589b67c062
+		dataCategory: Longitude
+		summarizeBy: none
+		sourceColumn: lng
+
+		annotation SummarizationSetBy = Automatic
+
+	column alt
+		dataType: int64
+		formatString: 0
+		lineageTag: c3bc354a-9ea3-4a7f-8af7-b9d2a0607936
+		summarizeBy: none
+		sourceColumn: alt
+
+		annotation SummarizationSetBy = Automatic
+
+	column url
+		dataType: string
+		lineageTag: 319e484a-ab0f-417f-93a9-a01cdfcb5a00
+		summarizeBy: none
+		sourceColumn: url
+
+		annotation SummarizationSetBy = Automatic
+
+	partition circuits = m
+		mode: import
+		source =
+				let
+				    Fonte = Csv.Document(File.Contents("D:\Study\Portfolio_BI\Formula 1 Race Data\dataset\circuits.csv"),[Delimiter=",", Columns=9, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+				    #"Valor Substituído" = Table.ReplaceValue(Fonte,".",",",Replacer.ReplaceText,{"Column6"}),
+				    #"Valor Substituído1" = Table.ReplaceValue(#"Valor Substituído",".",",",Replacer.ReplaceText,{"Column7"}),
+				    #"Cabeçalhos Promovidos" = Table.PromoteHeaders(#"Valor Substituído1", [PromoteAllScalars=true]),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(#"Cabeçalhos Promovidos",{{"circuitId", Int64.Type}, {"circuitRef", type text}, {"name", type text}, {"location", type text}, {"country", type text}, {"lat", type number}, {"lng", type number}, {"alt", Int64.Type}, {"url", type text}})
+				in
+				    #"Tipo Alterado"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navegação
+

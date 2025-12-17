@@ -1,0 +1,115 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/2.0.0/schema.json",
+  "name": "b80661f8181a3de51d87",
+  "displayName": "CIRCUITS",
+  "displayOption": "FitToPage",
+  "height": 720,
+  "width": 1280,
+  "objects": {
+    "background": [
+      {
+        "properties": {
+          "image": {
+            "image": {
+              "name": {
+                "expr": {
+                  "Literal": {
+                    "Value": "'CIRCUITOS.png'"
+                  }
+                }
+              },
+              "url": {
+                "expr": {
+                  "ResourcePackageItem": {
+                    "PackageName": "RegisteredResources",
+                    "PackageType": 1,
+                    "ItemName": "CIRCUITOS30634403962420487.png"
+                  }
+                }
+              },
+              "scaling": {
+                "expr": {
+                  "Literal": {
+                    "Value": "'Fill'"
+                  }
+                }
+              }
+            }
+          },
+          "transparency": {
+            "expr": {
+              "Literal": {
+                "Value": "0D"
+              }
+            }
+          },
+          "color": {
+            "solid": {
+              "color": {
+                "expr": {
+                  "ThemeDataColor": {
+                    "ColorId": 1,
+                    "Percent": 0
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    ]
+  },
+  "visibility": "HiddenInViewMode",
+  "visualInteractions": [
+    {
+      "source": "07ffa466432cd08ccb00",
+      "target": "375fa0b02403362772a0",
+      "type": "HighlightFilter"
+    },
+    {
+      "source": "07ffa466432cd08ccb00",
+      "target": "b38dc211489a0d85333b",
+      "type": "DataFilter"
+    },
+    {
+      "source": "07ffa466432cd08ccb00",
+      "target": "49b8772c07b57838960b",
+      "type": "DataFilter"
+    },
+    {
+      "source": "07ffa466432cd08ccb00",
+      "target": "307500eb83c80adf67d5",
+      "type": "DataFilter"
+    },
+    {
+      "source": "07ffa466432cd08ccb00",
+      "target": "f681b820821b4b48da6e",
+      "type": "DataFilter"
+    },
+    {
+      "source": "07ffa466432cd08ccb00",
+      "target": "1be60ce60c28a07047d6",
+      "type": "DataFilter"
+    },
+    {
+      "source": "375fa0b02403362772a0",
+      "target": "07ffa466432cd08ccb00",
+      "type": "DataFilter"
+    },
+    {
+      "source": "375fa0b02403362772a0",
+      "target": "3c337a17b843d0489521",
+      "type": "DataFilter"
+    },
+    {
+      "source": "3c337a17b843d0489521",
+      "target": "f681b820821b4b48da6e",
+      "type": "NoFilter"
+    },
+    {
+      "source": "3c337a17b843d0489521",
+      "target": "1be60ce60c28a07047d6",
+      "type": "NoFilter"
+    }
+  ]
+}

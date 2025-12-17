@@ -1,0 +1,254 @@
+{
+  "version": "1.1.0",
+  "diagrams": [
+    {
+      "ordinal": 0,
+      "scrollPosition": {
+        "x": 1812.7540681884316,
+        "y": 0
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 3035.3105714355111,
+            "y": 1039.9171963324679
+          },
+          "nodeIndex": "circuits",
+          "nodeLineageTag": "0712897f-fede-493b-afc4-7a79e19c6a56",
+          "size": {
+            "height": 296,
+            "width": 234
+          },
+          "zIndex": 18
+        },
+        {
+          "location": {
+            "x": 325.710618318032,
+            "y": 657.783295491324
+          },
+          "nodeIndex": "constructor_results",
+          "nodeLineageTag": "efa270dc-b1db-4261-88da-8d9bd91ca52c",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 9
+        },
+        {
+          "location": {
+            "x": 325.68116977143296,
+            "y": 200.78735295175329
+          },
+          "nodeIndex": "constructor_standings",
+          "nodeLineageTag": "5c1b128f-819b-4d3d-b547-1c63bea900dd",
+          "size": {
+            "height": 248,
+            "width": 234
+          },
+          "zIndex": 10
+        },
+        {
+          "location": {
+            "x": 641.46068848993355,
+            "y": 85.751958558313163
+          },
+          "nodeIndex": "constructors",
+          "nodeLineageTag": "74a75c15-0a48-4dce-be68-7c5ba838ce90",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 11
+        },
+        {
+          "location": {
+            "x": 1104.2204812814994,
+            "y": 447.07862302013297
+          },
+          "nodeIndex": "driver_standings",
+          "nodeLineageTag": "faa804bc-ccd9-4e3b-a476-024992b1e179",
+          "size": {
+            "height": 248,
+            "width": 234
+          },
+          "zIndex": 12
+        },
+        {
+          "location": {
+            "x": 1908.6101002969469,
+            "y": 409.17508358078891
+          },
+          "nodeIndex": "drivers",
+          "nodeLineageTag": "a50e9294-08e6-4ff5-9556-d02ae4a503ee",
+          "size": {
+            "height": 296,
+            "width": 234
+          },
+          "zIndex": 13
+        },
+        {
+          "location": {
+            "x": 1704,
+            "y": 38
+          },
+          "nodeIndex": "lap_times",
+          "nodeLineageTag": "d999b40c-fd55-4a19-96cc-a41bba750a64",
+          "size": {
+            "height": 224,
+            "width": 234
+          },
+          "zIndex": 14
+        },
+        {
+          "location": {
+            "x": 2272,
+            "y": 2
+          },
+          "nodeIndex": "qualifying",
+          "nodeLineageTag": "d9148119-bf75-4cd0-9d54-59cc3fd0271d",
+          "size": {
+            "height": 296,
+            "width": 234
+          },
+          "zIndex": 6
+        },
+        {
+          "location": {
+            "x": 2576.49018765474,
+            "y": 814.35016716157782
+          },
+          "nodeIndex": "races",
+          "nodeLineageTag": "8b71d517-4bbe-421b-a04f-ca41bdc1c4e7",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 15
+        },
+        {
+          "location": {
+            "x": 2840,
+            "y": 0
+          },
+          "nodeIndex": "results",
+          "nodeLineageTag": "fda8b0c6-e583-4235-aaa5-98b8b098bb99",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 16
+        },
+        {
+          "location": {
+            "x": 2291.286694713041,
+            "y": 1151.8937372944838
+          },
+          "nodeIndex": "seasons",
+          "nodeLineageTag": "6835e4b3-7be8-4fec-9fd0-a3d3f3abf1d7",
+          "size": {
+            "height": 128,
+            "width": 234
+          },
+          "zIndex": 7
+        },
+        {
+          "location": {
+            "x": 3493.3254620218136,
+            "y": 0
+          },
+          "nodeIndex": "sprint_results",
+          "nodeLineageTag": "197947ef-44ff-43f6-9e36-5294ce557763",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 17
+        },
+        {
+          "location": {
+            "x": 3709.8759792791566,
+            "y": 457.42312502247574
+          },
+          "nodeIndex": "status",
+          "nodeLineageTag": "d248e0d7-0a67-4a43-96be-8e18b3b28c04",
+          "size": {
+            "height": 128,
+            "width": 234
+          },
+          "zIndex": 8
+        },
+        {
+          "location": {
+            "x": 3668.1948095077237,
+            "y": 705.28032256790334
+          },
+          "nodeIndex": "pit_stops",
+          "nodeLineageTag": "0a775b59-d970-4497-8384-11a672850cd6",
+          "size": {
+            "height": 248,
+            "width": 234
+          },
+          "zIndex": 5
+        },
+        {
+          "location": {
+            "x": 3668.1948095077237,
+            "y": 777.28032256790334
+          },
+          "nodeIndex": "Driver Metrics",
+          "size": {
+            "height": 104,
+            "width": 234
+          },
+          "zIndex": 1
+        },
+        {
+          "location": {
+            "x": 3668.1948095077237,
+            "y": 753.28032256790334
+          },
+          "nodeIndex": "Teams Metrics",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 2
+        },
+        {
+          "location": {
+            "x": 3668.1948095077237,
+            "y": 777.28032256790334
+          },
+          "nodeIndex": "Other Metrics",
+          "nodeLineageTag": "1787041c-66d6-45cc-a4a7-6fc280e90b97",
+          "size": {
+            "height": 104,
+            "width": 234
+          },
+          "zIndex": 3
+        },
+        {
+          "location": {
+            "x": 3668.1948095077237,
+            "y": 765.28032256790334
+          },
+          "nodeIndex": "circuits_img",
+          "nodeLineageTag": "e98e82e0-e1a0-4c8a-b902-6c6a7fe1080c",
+          "size": {
+            "height": 128,
+            "width": 234
+          },
+          "zIndex": 4
+        }
+      ],
+      "name": "Todas as tabelas",
+      "zoomValue": 62.336089590424194,
+      "pinKeyFieldsToTop": true,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    }
+  ],
+  "selectedDiagram": "Todas as tabelas",
+  "defaultDiagram": "Todas as tabelas"
+}

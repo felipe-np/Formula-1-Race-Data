@@ -1,0 +1,81 @@
+table pit_stops
+	lineageTag: 0a775b59-d970-4497-8384-11a672850cd6
+
+	column raceId
+		dataType: int64
+		formatString: 0
+		lineageTag: e0a537ef-998b-4f2f-9ba5-75d179999abf
+		summarizeBy: none
+		sourceColumn: raceId
+
+		annotation SummarizationSetBy = Automatic
+
+	column driverId
+		dataType: int64
+		formatString: 0
+		lineageTag: 0be4731f-1af1-4358-836a-b5779580e94e
+		summarizeBy: none
+		sourceColumn: driverId
+
+		annotation SummarizationSetBy = Automatic
+
+	column stop
+		dataType: int64
+		formatString: 0
+		lineageTag: 27ea2d1b-58c3-4038-930b-5ee098936c91
+		summarizeBy: sum
+		sourceColumn: stop
+
+		annotation SummarizationSetBy = Automatic
+
+	column lap
+		dataType: int64
+		formatString: 0
+		lineageTag: bfe540fe-33a9-4a4e-99cb-1ebfa91967d2
+		summarizeBy: sum
+		sourceColumn: lap
+
+		annotation SummarizationSetBy = Automatic
+
+	column time
+		dataType: dateTime
+		formatString: Long Time
+		lineageTag: 99df6587-61c1-4b7c-a8f3-2f6b295abc73
+		summarizeBy: none
+		sourceColumn: time
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Time
+
+	column duration
+		dataType: string
+		lineageTag: 3c20e26b-9e9f-4bf3-8ab7-72a4dd6ea111
+		summarizeBy: none
+		sourceColumn: duration
+
+		annotation SummarizationSetBy = Automatic
+
+	column milliseconds
+		dataType: int64
+		formatString: 0
+		lineageTag: 866f8c3e-0504-4e3c-8a1f-f88bd62487df
+		summarizeBy: sum
+		sourceColumn: milliseconds
+
+		annotation SummarizationSetBy = Automatic
+
+	partition pit_stops = m
+		mode: import
+		source =
+				let
+				    Fonte = Csv.Document(File.Contents("D:\Study\Portfolio_BI\Formula 1 Race Data\dataset\pit_stops.csv"),[Delimiter=",", Columns=7, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    #"Cabeçalhos Promovidos" = Table.PromoteHeaders(Fonte, [PromoteAllScalars=true]),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(#"Cabeçalhos Promovidos",{{"raceId", Int64.Type}, {"driverId", Int64.Type}, {"stop", Int64.Type}, {"lap", Int64.Type}, {"time", type time}, {"duration", type text}, {"milliseconds", Int64.Type}})
+				in
+				    #"Tipo Alterado"
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+

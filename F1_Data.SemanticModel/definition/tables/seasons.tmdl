@@ -1,0 +1,34 @@
+table seasons
+	lineageTag: 6835e4b3-7be8-4fec-9fd0-a3d3f3abf1d7
+
+	column year
+		dataType: int64
+		formatString: 0
+		lineageTag: 71ec8566-2a97-4aa9-8f06-c528d0f8f65e
+		summarizeBy: none
+		sourceColumn: year
+
+		changedProperty = DataType
+
+		annotation SummarizationSetBy = Automatic
+
+	column url
+		dataType: string
+		lineageTag: ac357fba-2aa8-4ac2-9f7c-d707f6a61372
+		summarizeBy: none
+		sourceColumn: url
+
+		annotation SummarizationSetBy = Automatic
+
+	partition seasons = m
+		mode: import
+		source =
+				let
+				    Fonte = Csv.Document(File.Contents("D:\Study\Portfolio_BI\Formula 1 Race Data\dataset\seasons.csv"),[Delimiter=",", Columns=2, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    #"Cabeçalhos Promovidos" = Table.PromoteHeaders(Fonte, [PromoteAllScalars=true]),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(#"Cabeçalhos Promovidos",{{"year", Int64.Type}, {"url", type text}})
+				in
+				    #"Tipo Alterado"
+
+	annotation PBI_ResultType = Table
+

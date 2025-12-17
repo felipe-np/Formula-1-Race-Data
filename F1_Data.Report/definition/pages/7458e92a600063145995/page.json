@@ -1,0 +1,185 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/2.0.0/schema.json",
+  "name": "7458e92a600063145995",
+  "displayName": "TEAMS",
+  "displayOption": "FitToPage",
+  "height": 720,
+  "width": 1280,
+  "objects": {
+    "background": [
+      {
+        "properties": {
+          "image": {
+            "image": {
+              "name": {
+                "expr": {
+                  "Literal": {
+                    "Value": "'EQUIPES.png'"
+                  }
+                }
+              },
+              "url": {
+                "expr": {
+                  "ResourcePackageItem": {
+                    "PackageName": "RegisteredResources",
+                    "PackageType": 1,
+                    "ItemName": "EQUIPES44924392786989487.png"
+                  }
+                }
+              },
+              "scaling": {
+                "expr": {
+                  "Literal": {
+                    "Value": "'Fill'"
+                  }
+                }
+              }
+            }
+          },
+          "transparency": {
+            "expr": {
+              "Literal": {
+                "Value": "0D"
+              }
+            }
+          },
+          "color": {
+            "solid": {
+              "color": {
+                "expr": {
+                  "ThemeDataColor": {
+                    "ColorId": 1,
+                    "Percent": 0
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    ]
+  },
+  "visibility": "HiddenInViewMode",
+  "visualInteractions": [
+    {
+      "source": "6b9a4760e61e72b769de",
+      "target": "b5a01cb13080a398739b",
+      "type": "DataFilter"
+    },
+    {
+      "source": "6b9a4760e61e72b769de",
+      "target": "a3139325aa07870c3568",
+      "type": "DataFilter"
+    },
+    {
+      "source": "6b9a4760e61e72b769de",
+      "target": "3eedcb90ed824a0aa389",
+      "type": "DataFilter"
+    },
+    {
+      "source": "6b9a4760e61e72b769de",
+      "target": "b712031d4c3a1077ea4a",
+      "type": "DataFilter"
+    },
+    {
+      "source": "6b9a4760e61e72b769de",
+      "target": "1ed4a229ce9558d007ba",
+      "type": "DataFilter"
+    },
+    {
+      "source": "6b9a4760e61e72b769de",
+      "target": "bd69abec5493e60e113c",
+      "type": "DataFilter"
+    },
+    {
+      "source": "b5a01cb13080a398739b",
+      "target": "6b9a4760e61e72b769de",
+      "type": "DataFilter"
+    },
+    {
+      "source": "b5a01cb13080a398739b",
+      "target": "3eedcb90ed824a0aa389",
+      "type": "DataFilter"
+    },
+    {
+      "source": "b5a01cb13080a398739b",
+      "target": "a3139325aa07870c3568",
+      "type": "DataFilter"
+    },
+    {
+      "source": "b5a01cb13080a398739b",
+      "target": "b712031d4c3a1077ea4a",
+      "type": "DataFilter"
+    },
+    {
+      "source": "b5a01cb13080a398739b",
+      "target": "bd69abec5493e60e113c",
+      "type": "DataFilter"
+    },
+    {
+      "source": "b5a01cb13080a398739b",
+      "target": "1ed4a229ce9558d007ba",
+      "type": "DataFilter"
+    },
+    {
+      "source": "3eedcb90ed824a0aa389",
+      "target": "b712031d4c3a1077ea4a",
+      "type": "HighlightFilter"
+    },
+    {
+      "source": "3eedcb90ed824a0aa389",
+      "target": "bd69abec5493e60e113c",
+      "type": "HighlightFilter"
+    },
+    {
+      "source": "3eedcb90ed824a0aa389",
+      "target": "1ed4a229ce9558d007ba",
+      "type": "HighlightFilter"
+    },
+    {
+      "source": "b712031d4c3a1077ea4a",
+      "target": "bd69abec5493e60e113c",
+      "type": "HighlightFilter"
+    },
+    {
+      "source": "b712031d4c3a1077ea4a",
+      "target": "1ed4a229ce9558d007ba",
+      "type": "HighlightFilter"
+    },
+    {
+      "source": "b712031d4c3a1077ea4a",
+      "target": "3eedcb90ed824a0aa389",
+      "type": "HighlightFilter"
+    },
+    {
+      "source": "bd69abec5493e60e113c",
+      "target": "b712031d4c3a1077ea4a",
+      "type": "HighlightFilter"
+    },
+    {
+      "source": "bd69abec5493e60e113c",
+      "target": "3eedcb90ed824a0aa389",
+      "type": "HighlightFilter"
+    },
+    {
+      "source": "bd69abec5493e60e113c",
+      "target": "1ed4a229ce9558d007ba",
+      "type": "HighlightFilter"
+    },
+    {
+      "source": "1ed4a229ce9558d007ba",
+      "target": "3eedcb90ed824a0aa389",
+      "type": "HighlightFilter"
+    },
+    {
+      "source": "1ed4a229ce9558d007ba",
+      "target": "b712031d4c3a1077ea4a",
+      "type": "HighlightFilter"
+    },
+    {
+      "source": "1ed4a229ce9558d007ba",
+      "target": "bd69abec5493e60e113c",
+      "type": "HighlightFilter"
+    }
+  ]
+}

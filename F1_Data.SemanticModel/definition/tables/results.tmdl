@@ -1,0 +1,185 @@
+table results
+	lineageTag: fda8b0c6-e583-4235-aaa5-98b8b098bb99
+
+	column resultId
+		dataType: int64
+		formatString: 0
+		lineageTag: 5276c465-45c3-4399-9b0e-7b1eed223eea
+		summarizeBy: count
+		sourceColumn: resultId
+
+		annotation SummarizationSetBy = Automatic
+
+	column raceId
+		dataType: int64
+		formatString: 0
+		lineageTag: 8c133675-234b-4fc9-8af0-6d7e677d4edc
+		summarizeBy: none
+		sourceColumn: raceId
+
+		annotation SummarizationSetBy = Automatic
+
+	column driverId
+		dataType: int64
+		formatString: 0
+		lineageTag: d51dc9ab-d419-4a79-887a-871128774a92
+		summarizeBy: none
+		sourceColumn: driverId
+
+		annotation SummarizationSetBy = Automatic
+
+	column constructorId
+		dataType: int64
+		formatString: 0
+		lineageTag: 8dad96b1-3607-4d8c-9fbf-995f44fca3a2
+		summarizeBy: none
+		sourceColumn: constructorId
+
+		annotation SummarizationSetBy = Automatic
+
+	column number
+		dataType: int64
+		formatString: 0
+		lineageTag: 6dea1a54-d196-4f81-b576-de6937ec9b0c
+		summarizeBy: sum
+		sourceColumn: number
+
+		annotation SummarizationSetBy = Automatic
+
+	column grid
+		dataType: int64
+		formatString: 0
+		lineageTag: a72b6041-297d-4f06-89d1-de9f4b4c7984
+		summarizeBy: sum
+		sourceColumn: grid
+
+		annotation SummarizationSetBy = Automatic
+
+	column position
+		dataType: string
+		lineageTag: 6b4baf4b-35a7-42d5-a62e-2b23d9a1a93e
+		summarizeBy: none
+		sourceColumn: position
+
+		annotation SummarizationSetBy = Automatic
+
+	column positionText
+		dataType: string
+		lineageTag: 23dd067a-cae3-4165-b9fa-c2c8b6919f48
+		summarizeBy: none
+		sourceColumn: positionText
+
+		annotation SummarizationSetBy = Automatic
+
+	column positionOrder
+		dataType: int64
+		formatString: 0
+		lineageTag: 7f516b9d-ac11-4956-96fa-be6490bd3771
+		summarizeBy: sum
+		sourceColumn: positionOrder
+
+		annotation SummarizationSetBy = Automatic
+
+	column points
+		dataType: int64
+		formatString: 0
+		lineageTag: 06a2db88-d43d-494a-9cf5-15bea7617fe7
+		summarizeBy: sum
+		sourceColumn: points
+
+		annotation SummarizationSetBy = Automatic
+
+	column laps
+		dataType: int64
+		formatString: 0
+		lineageTag: acf115d9-57ad-44a4-9039-ebdb3a0f37ec
+		summarizeBy: sum
+		sourceColumn: laps
+
+		annotation SummarizationSetBy = Automatic
+
+	column time
+		dataType: string
+		lineageTag: 9d08fe66-fe65-4b62-9cd8-714365501eae
+		summarizeBy: none
+		sourceColumn: time
+
+		annotation SummarizationSetBy = Automatic
+
+	column milliseconds
+		dataType: string
+		lineageTag: 8ae91d4f-cf95-42be-8763-27465171f19e
+		summarizeBy: none
+		sourceColumn: milliseconds
+
+		annotation SummarizationSetBy = Automatic
+
+	column fastestLap
+		dataType: string
+		lineageTag: dbb0e678-bf24-4f60-875b-58e521fbe4a5
+		summarizeBy: none
+		sourceColumn: fastestLap
+
+		annotation SummarizationSetBy = Automatic
+
+	column rank
+		dataType: string
+		lineageTag: b3b65807-41a7-4641-990b-bf1b6dc5292a
+		summarizeBy: none
+		sourceColumn: rank
+
+		annotation SummarizationSetBy = Automatic
+
+	column fastestLapTime
+		dataType: string
+		lineageTag: 6c4f04d1-6c17-49c2-ab18-47932ad7aabd
+		summarizeBy: none
+		sourceColumn: fastestLapTime
+
+		annotation SummarizationSetBy = Automatic
+
+	column fastestLapSpeed
+		dataType: double
+		lineageTag: 94d1eae9-25a1-4b23-9d23-21fbc7b906ef
+		summarizeBy: sum
+		sourceColumn: fastestLapSpeed
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column statusId
+		dataType: int64
+		formatString: 0
+		lineageTag: 35b983ce-9f4e-4fcb-83b9-0d10ffd0cf32
+		summarizeBy: none
+		sourceColumn: statusId
+
+		annotation SummarizationSetBy = Automatic
+
+	partition results = m
+		mode: import
+		source =
+				let
+				    Fonte = Csv.Document(File.Contents("D:\Study\Portfolio_BI\Formula 1 Race Data\dataset\results.csv"),[Delimiter=",", Columns=18, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    #"Cabeçalhos Promovidos" = Table.PromoteHeaders(Fonte, [PromoteAllScalars=true]),
+				    #"Valor Substituído7" = Table.ReplaceValue(#"Cabeçalhos Promovidos","/N","",Replacer.ReplaceText,{"number"}),
+				    #"Valor Substituído8" = Table.ReplaceValue(#"Valor Substituído7","\N","",Replacer.ReplaceText,{"number"}),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(#"Valor Substituído8",{{"resultId", Int64.Type}, {"raceId", Int64.Type}, {"driverId", Int64.Type}, {"constructorId", Int64.Type}, {"number", Int64.Type}, {"grid", Int64.Type}, {"position", type text}, {"positionText", type text}, {"positionOrder", Int64.Type}, {"points", Int64.Type}, {"laps", Int64.Type}, {"time", type text}, {"milliseconds", type text}, {"fastestLap", type text}, {"rank", type text}, {"fastestLapTime", type text}, {"fastestLapSpeed", type text}, {"statusId", Int64.Type}}),
+				    #"Valor Substituído" = Table.ReplaceValue(#"Tipo Alterado","\N","",Replacer.ReplaceText,{"position"}),
+				    #"Valor Substituído1" = Table.ReplaceValue(#"Valor Substituído","\N","",Replacer.ReplaceText,{"time"}),
+				    #"Valor Substituído2" = Table.ReplaceValue(#"Valor Substituído1","\N","",Replacer.ReplaceText,{"milliseconds"}),
+				    #"Valor Substituído3" = Table.ReplaceValue(#"Valor Substituído2","\N","",Replacer.ReplaceText,{"fastestLap", "rank", "fastestLapTime", "fastestLapSpeed"}),
+				    #"Valor Substituído4" = Table.ReplaceValue(#"Valor Substituído3",".",",",Replacer.ReplaceText,{"fastestLapSpeed"}),
+				    #"Tipo Alterado1" = Table.TransformColumnTypes(#"Valor Substituído4",{{"fastestLapSpeed", type number}, {"number", type text}}),
+				    #"Valor Substituído5" = Table.ReplaceValue(#"Tipo Alterado1","/N","",Replacer.ReplaceText,{"number"}),
+				    #"Tipo Alterado2" = Table.TransformColumnTypes(#"Valor Substituído5",{{"number", type text}}),
+				    #"Valor Substituído6" = Table.ReplaceValue(#"Tipo Alterado2","    \N","",Replacer.ReplaceText,{"number"}),
+				    #"Tipo Alterado3" = Table.TransformColumnTypes(#"Valor Substituído6",{{"number", Int64.Type}})
+				in
+				    #"Tipo Alterado3"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navegação
+

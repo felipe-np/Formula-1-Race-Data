@@ -1,0 +1,99 @@
+table qualifying
+	lineageTag: d9148119-bf75-4cd0-9d54-59cc3fd0271d
+
+	column qualifyId
+		dataType: int64
+		formatString: 0
+		lineageTag: a8bf317b-14ad-4e6d-8a3e-fd404fb37884
+		summarizeBy: count
+		sourceColumn: qualifyId
+
+		annotation SummarizationSetBy = Automatic
+
+	column raceId
+		dataType: int64
+		formatString: 0
+		lineageTag: 99dbeca6-b263-4eee-a149-6ae45caea59f
+		summarizeBy: none
+		sourceColumn: raceId
+
+		annotation SummarizationSetBy = Automatic
+
+	column driverId
+		dataType: int64
+		formatString: 0
+		lineageTag: 01408395-8040-4cf4-bb71-23a19b5512a2
+		summarizeBy: none
+		sourceColumn: driverId
+
+		annotation SummarizationSetBy = Automatic
+
+	column constructorId
+		dataType: int64
+		formatString: 0
+		lineageTag: 593321aa-a098-40a6-a147-c434f43aaee0
+		summarizeBy: none
+		sourceColumn: constructorId
+
+		annotation SummarizationSetBy = Automatic
+
+	column number
+		dataType: int64
+		formatString: 0
+		lineageTag: f31a1aa1-b0eb-4d86-ac78-4c76c91c7523
+		summarizeBy: sum
+		sourceColumn: number
+
+		annotation SummarizationSetBy = Automatic
+
+	column position
+		dataType: int64
+		formatString: 0
+		lineageTag: 56323db8-b5cf-497b-af8b-6bbec03a8634
+		summarizeBy: sum
+		sourceColumn: position
+
+		annotation SummarizationSetBy = Automatic
+
+	column q1
+		dataType: string
+		lineageTag: 14c05eb6-1b3c-4d51-b7f1-87b1700e669a
+		summarizeBy: none
+		sourceColumn: q1
+
+		annotation SummarizationSetBy = Automatic
+
+	column q2
+		dataType: string
+		lineageTag: ae744e45-057a-45d2-abfc-05b8d3fd0eac
+		summarizeBy: none
+		sourceColumn: q2
+
+		annotation SummarizationSetBy = Automatic
+
+	column q3
+		dataType: string
+		lineageTag: a932ebf0-53fe-4ba7-b486-71168c3829cc
+		summarizeBy: none
+		sourceColumn: q3
+
+		annotation SummarizationSetBy = Automatic
+
+	partition qualifying = m
+		mode: import
+		source =
+				let
+				    Fonte = Csv.Document(File.Contents("D:\Study\Portfolio_BI\Formula 1 Race Data\dataset\qualifying.csv"),[Delimiter=",", Columns=9, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    #"Cabeçalhos Promovidos" = Table.PromoteHeaders(Fonte, [PromoteAllScalars=true]),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(#"Cabeçalhos Promovidos",{{"qualifyId", Int64.Type}, {"raceId", Int64.Type}, {"driverId", Int64.Type}, {"constructorId", Int64.Type}, {"number", Int64.Type}, {"position", Int64.Type}, {"q1", type text}, {"q2", type text}, {"q3", type text}}),
+				    #"Valor Substituído" = Table.ReplaceValue(#"Tipo Alterado","\N","",Replacer.ReplaceText,{"q3"}),
+				    #"Valor Substituído1" = Table.ReplaceValue(#"Valor Substituído","\N","",Replacer.ReplaceText,{"q2"}),
+				    #"Valor Substituído2" = Table.ReplaceValue(#"Valor Substituído1","\N","",Replacer.ReplaceText,{"q1"}),
+				    #"Tipo Alterado1" = Table.TransformColumnTypes(#"Valor Substituído2",{{"q3", type text}})
+				in
+				    #"Tipo Alterado1"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navegação
+

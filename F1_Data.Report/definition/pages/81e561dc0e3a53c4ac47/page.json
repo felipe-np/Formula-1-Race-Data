@@ -1,0 +1,261 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/2.0.0/schema.json",
+  "name": "81e561dc0e3a53c4ac47",
+  "displayName": "DRIVERS",
+  "displayOption": "FitToPage",
+  "height": 720,
+  "width": 1280,
+  "pageBinding": {
+    "name": "fe129c7fa189800e2dee",
+    "type": "Default",
+    "parameters": [],
+    "referenceScope": "CrossReport"
+  },
+  "objects": {
+    "background": [
+      {
+        "properties": {
+          "image": {
+            "image": {
+              "name": {
+                "expr": {
+                  "Literal": {
+                    "Value": "'PILOTOS.png'"
+                  }
+                }
+              },
+              "url": {
+                "expr": {
+                  "ResourcePackageItem": {
+                    "PackageName": "RegisteredResources",
+                    "PackageType": 1,
+                    "ItemName": "PILOTOS6269558675355875.png"
+                  }
+                }
+              },
+              "scaling": {
+                "expr": {
+                  "Literal": {
+                    "Value": "'Fill'"
+                  }
+                }
+              }
+            }
+          },
+          "transparency": {
+            "expr": {
+              "Literal": {
+                "Value": "0D"
+              }
+            }
+          },
+          "color": {
+            "solid": {
+              "color": {
+                "expr": {
+                  "ThemeDataColor": {
+                    "ColorId": 1,
+                    "Percent": 0
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    ]
+  },
+  "visibility": "HiddenInViewMode",
+  "visualInteractions": [
+    {
+      "source": "f264638d4179332d0017",
+      "target": "6860ded0039a80a2603e",
+      "type": "NoFilter"
+    },
+    {
+      "source": "0e4d9965e6b014a0316c",
+      "target": "6860ded0039a80a2603e",
+      "type": "NoFilter"
+    },
+    {
+      "source": "ee608818c049039e02e8",
+      "target": "6860ded0039a80a2603e",
+      "type": "NoFilter"
+    },
+    {
+      "source": "6b7b7d7a9d3b3d6c849d",
+      "target": "6860ded0039a80a2603e",
+      "type": "NoFilter"
+    },
+    {
+      "source": "6b7b7d7a9d3b3d6c849d",
+      "target": "858d0d8055b81c701231",
+      "type": "NoFilter"
+    },
+    {
+      "source": "6860ded0039a80a2603e",
+      "target": "858d0d8055b81c701231",
+      "type": "NoFilter"
+    },
+    {
+      "source": "6860ded0039a80a2603e",
+      "target": "6b7b7d7a9d3b3d6c849d",
+      "type": "DataFilter"
+    },
+    {
+      "source": "6860ded0039a80a2603e",
+      "target": "ee608818c049039e02e8",
+      "type": "DataFilter"
+    },
+    {
+      "source": "6860ded0039a80a2603e",
+      "target": "0e4d9965e6b014a0316c",
+      "type": "DataFilter"
+    },
+    {
+      "source": "6860ded0039a80a2603e",
+      "target": "f264638d4179332d0017",
+      "type": "DataFilter"
+    },
+    {
+      "source": "f264638d4179332d0017",
+      "target": "858d0d8055b81c701231",
+      "type": "NoFilter"
+    },
+    {
+      "source": "0e4d9965e6b014a0316c",
+      "target": "858d0d8055b81c701231",
+      "type": "NoFilter"
+    },
+    {
+      "source": "ee608818c049039e02e8",
+      "target": "858d0d8055b81c701231",
+      "type": "NoFilter"
+    },
+    {
+      "source": "858d0d8055b81c701231",
+      "target": "f264638d4179332d0017",
+      "type": "DataFilter"
+    },
+    {
+      "source": "858d0d8055b81c701231",
+      "target": "6b7b7d7a9d3b3d6c849d",
+      "type": "DataFilter"
+    },
+    {
+      "source": "858d0d8055b81c701231",
+      "target": "ee608818c049039e02e8",
+      "type": "DataFilter"
+    },
+    {
+      "source": "858d0d8055b81c701231",
+      "target": "0e4d9965e6b014a0316c",
+      "type": "DataFilter"
+    },
+    {
+      "source": "6860ded0039a80a2603e",
+      "target": "6802b8f577362c7ab78a",
+      "type": "NoFilter"
+    },
+    {
+      "source": "6b7b7d7a9d3b3d6c849d",
+      "target": "f264638d4179332d0017",
+      "type": "HighlightFilter"
+    },
+    {
+      "source": "6b7b7d7a9d3b3d6c849d",
+      "target": "0e4d9965e6b014a0316c",
+      "type": "HighlightFilter"
+    },
+    {
+      "source": "6b7b7d7a9d3b3d6c849d",
+      "target": "ee608818c049039e02e8",
+      "type": "HighlightFilter"
+    },
+    {
+      "source": "858d0d8055b81c701231",
+      "target": "6860ded0039a80a2603e",
+      "type": "NoFilter"
+    },
+    {
+      "source": "f264638d4179332d0017",
+      "target": "0e4d9965e6b014a0316c",
+      "type": "HighlightFilter"
+    },
+    {
+      "source": "f264638d4179332d0017",
+      "target": "ee608818c049039e02e8",
+      "type": "HighlightFilter"
+    },
+    {
+      "source": "f264638d4179332d0017",
+      "target": "6b7b7d7a9d3b3d6c849d",
+      "type": "HighlightFilter"
+    },
+    {
+      "source": "0e4d9965e6b014a0316c",
+      "target": "6b7b7d7a9d3b3d6c849d",
+      "type": "HighlightFilter"
+    },
+    {
+      "source": "0e4d9965e6b014a0316c",
+      "target": "ee608818c049039e02e8",
+      "type": "HighlightFilter"
+    },
+    {
+      "source": "ee608818c049039e02e8",
+      "target": "6b7b7d7a9d3b3d6c849d",
+      "type": "HighlightFilter"
+    },
+    {
+      "source": "ee608818c049039e02e8",
+      "target": "0e4d9965e6b014a0316c",
+      "type": "HighlightFilter"
+    },
+    {
+      "source": "ee608818c049039e02e8",
+      "target": "f264638d4179332d0017",
+      "type": "HighlightFilter"
+    },
+    {
+      "source": "6802b8f577362c7ab78a",
+      "target": "6860ded0039a80a2603e",
+      "type": "DataFilter"
+    },
+    {
+      "source": "6802b8f577362c7ab78a",
+      "target": "f264638d4179332d0017",
+      "type": "DataFilter"
+    },
+    {
+      "source": "6802b8f577362c7ab78a",
+      "target": "0e4d9965e6b014a0316c",
+      "type": "DataFilter"
+    },
+    {
+      "source": "6802b8f577362c7ab78a",
+      "target": "ee608818c049039e02e8",
+      "type": "DataFilter"
+    },
+    {
+      "source": "6802b8f577362c7ab78a",
+      "target": "6b7b7d7a9d3b3d6c849d",
+      "type": "DataFilter"
+    },
+    {
+      "source": "6802b8f577362c7ab78a",
+      "target": "858d0d8055b81c701231",
+      "type": "DataFilter"
+    },
+    {
+      "source": "0e4d9965e6b014a0316c",
+      "target": "f264638d4179332d0017",
+      "type": "HighlightFilter"
+    },
+    {
+      "source": "f264638d4179332d0017",
+      "target": "6802b8f577362c7ab78a",
+      "type": "NoFilter"
+    }
+  ]
+}

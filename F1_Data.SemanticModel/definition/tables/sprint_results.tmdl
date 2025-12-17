@@ -1,0 +1,163 @@
+table sprint_results
+	lineageTag: 197947ef-44ff-43f6-9e36-5294ce557763
+
+	column resultId
+		dataType: int64
+		formatString: 0
+		lineageTag: d6871cf7-e8c2-4d03-8d0b-7a134f414963
+		summarizeBy: count
+		sourceColumn: resultId
+
+		annotation SummarizationSetBy = Automatic
+
+	column raceId
+		dataType: int64
+		formatString: 0
+		lineageTag: c707d76c-b703-4695-8576-ec9c5faeabc7
+		summarizeBy: none
+		sourceColumn: raceId
+
+		annotation SummarizationSetBy = Automatic
+
+	column driverId
+		dataType: int64
+		formatString: 0
+		lineageTag: 16854c09-5726-45ff-a1b7-6773e8eb0bf2
+		summarizeBy: none
+		sourceColumn: driverId
+
+		annotation SummarizationSetBy = Automatic
+
+	column constructorId
+		dataType: int64
+		formatString: 0
+		lineageTag: 3bc8cd52-d00a-41b6-ab2f-325d7f5b06c5
+		summarizeBy: none
+		sourceColumn: constructorId
+
+		annotation SummarizationSetBy = Automatic
+
+	column number
+		dataType: int64
+		formatString: 0
+		lineageTag: 73b82363-c9b6-45f1-b544-6b6aaf4fb0a2
+		summarizeBy: sum
+		sourceColumn: number
+
+		annotation SummarizationSetBy = Automatic
+
+	column grid
+		dataType: int64
+		formatString: 0
+		lineageTag: b6d2e092-74e8-4e17-b0c8-7b1aa1eb6af4
+		summarizeBy: sum
+		sourceColumn: grid
+
+		annotation SummarizationSetBy = Automatic
+
+	column position
+		dataType: int64
+		formatString: 0
+		lineageTag: 48b36e14-8e14-4231-84e7-42277b86f015
+		summarizeBy: sum
+		sourceColumn: position
+
+		annotation SummarizationSetBy = Automatic
+
+	column positionText
+		dataType: string
+		lineageTag: fbd32d18-0f99-44af-aa71-9ce9a1fc49b9
+		summarizeBy: none
+		sourceColumn: positionText
+
+		annotation SummarizationSetBy = Automatic
+
+	column positionOrder
+		dataType: int64
+		formatString: 0
+		lineageTag: 2055f855-13b7-4831-8c66-c50b214bc092
+		summarizeBy: sum
+		sourceColumn: positionOrder
+
+		annotation SummarizationSetBy = Automatic
+
+	column points
+		dataType: int64
+		formatString: 0
+		lineageTag: 6b098640-06ed-4efe-8484-b32ff106840a
+		summarizeBy: sum
+		sourceColumn: points
+
+		annotation SummarizationSetBy = Automatic
+
+	column laps
+		dataType: int64
+		formatString: 0
+		lineageTag: d860248f-b227-4ee7-bbb8-f2627f3cb103
+		summarizeBy: sum
+		sourceColumn: laps
+
+		annotation SummarizationSetBy = Automatic
+
+	column time
+		dataType: string
+		lineageTag: d8f96409-68d0-487a-a94e-402c7f6d208e
+		summarizeBy: none
+		sourceColumn: time
+
+		annotation SummarizationSetBy = Automatic
+
+	column milliseconds
+		dataType: int64
+		formatString: 0
+		lineageTag: 8114eb49-add2-4e10-9461-3c5ba538d711
+		summarizeBy: sum
+		sourceColumn: milliseconds
+
+		annotation SummarizationSetBy = Automatic
+
+	column fastestLap
+		dataType: int64
+		formatString: 0
+		lineageTag: 785f85bb-e4b4-46eb-86e5-17f66204c471
+		summarizeBy: sum
+		sourceColumn: fastestLap
+
+		annotation SummarizationSetBy = Automatic
+
+	column fastestLapTime
+		dataType: string
+		lineageTag: 98dec722-12e3-489f-86d8-a6eeb016077e
+		summarizeBy: none
+		sourceColumn: fastestLapTime
+
+		annotation SummarizationSetBy = Automatic
+
+	column statusId
+		dataType: int64
+		formatString: 0
+		lineageTag: f0084cce-7633-42d2-a094-008fc4d006b8
+		summarizeBy: none
+		sourceColumn: statusId
+
+		annotation SummarizationSetBy = Automatic
+
+	partition sprint_results = m
+		mode: import
+		source =
+				let
+				    Fonte = Csv.Document(File.Contents("D:\Study\Portfolio_BI\Formula 1 Race Data\dataset\sprint_results.csv"),[Delimiter=",", Columns=16, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    #"Cabeçalhos Promovidos" = Table.PromoteHeaders(Fonte, [PromoteAllScalars=true]),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(#"Cabeçalhos Promovidos",{{"resultId", Int64.Type}, {"raceId", Int64.Type}, {"driverId", Int64.Type}, {"constructorId", Int64.Type}, {"number", Int64.Type}, {"grid", Int64.Type}, {"position", type text}, {"positionText", type text}, {"positionOrder", Int64.Type}, {"points", Int64.Type}, {"laps", Int64.Type}, {"time", type text}, {"milliseconds", type text}, {"fastestLap", type text}, {"fastestLapTime", type text}, {"statusId", Int64.Type}}),
+				    #"Valor Substituído" = Table.ReplaceValue(#"Tipo Alterado","\N","",Replacer.ReplaceText,{"position"}),
+				    #"Valor Substituído1" = Table.ReplaceValue(#"Valor Substituído","\N","",Replacer.ReplaceText,{"fastestLap"}),
+				    #"Valor Substituído2" = Table.ReplaceValue(#"Valor Substituído1","\N","",Replacer.ReplaceText,{"time", "milliseconds"}),
+				    #"Valor Substituído3" = Table.ReplaceValue(#"Valor Substituído2","\N","",Replacer.ReplaceText,{"fastestLapTime"}),
+				    #"Tipo Alterado1" = Table.TransformColumnTypes(#"Valor Substituído3",{{"position", Int64.Type}, {"milliseconds", Int64.Type}, {"fastestLap", Int64.Type}})
+				in
+				    #"Tipo Alterado1"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navegação
+

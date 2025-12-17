@@ -1,0 +1,36 @@
+table circuits_img
+	lineageTag: e98e82e0-e1a0-4c8a-b902-6c6a7fe1080c
+
+	column circuitId
+		dataType: int64
+		formatString: 0
+		lineageTag: f4aa47a8-ea35-4766-8bd8-5dd31f2b0df5
+		summarizeBy: none
+		sourceColumn: circuitId
+
+		annotation SummarizationSetBy = Automatic
+
+	column url_img
+		dataType: string
+		lineageTag: 5668beb2-948d-492d-ab74-064abffeee40
+		dataCategory: ImageUrl
+		summarizeBy: none
+		sourceColumn: url_img
+
+		annotation SummarizationSetBy = Automatic
+
+	partition circuits_img = m
+		mode: import
+		source =
+				let
+				    Fonte = Excel.Workbook(File.Contents("D:\Study\Portfolio_BI\Formula 1 Race Data\dataset\circuits_img.xlsx"), null, true),
+				    circuits_img_Sheet = Fonte{[Item="circuits_img",Kind="Sheet"]}[Data],
+				    #"Cabeçalhos Promovidos" = Table.PromoteHeaders(circuits_img_Sheet, [PromoteAllScalars=true]),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(#"Cabeçalhos Promovidos",{{"circuitId", Int64.Type}, {"url_img", type text}})
+				in
+				    #"Tipo Alterado"
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+

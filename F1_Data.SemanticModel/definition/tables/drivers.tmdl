@@ -1,0 +1,153 @@
+table drivers
+	lineageTag: a50e9294-08e6-4ff5-9556-d02ae4a503ee
+
+	column driverId
+		dataType: int64
+		formatString: 0
+		lineageTag: 3dfbc445-a1a7-437e-aa1c-a8960b622aea
+		summarizeBy: none
+		sourceColumn: driverId
+
+		annotation SummarizationSetBy = Automatic
+
+	column driverRef
+		dataType: string
+		lineageTag: 349a6b32-c452-476b-b669-9345c99c5ff6
+		summarizeBy: none
+		sourceColumn: driverRef
+
+		annotation SummarizationSetBy = Automatic
+
+	column number
+		dataType: int64
+		formatString: 0
+		lineageTag: c1d3ff3b-eec3-4bea-9ef8-ba7af7afe13e
+		summarizeBy: sum
+		sourceColumn: number
+
+		annotation SummarizationSetBy = Automatic
+
+	column code
+		dataType: string
+		lineageTag: 5c580a3a-1b86-4d49-81f0-074f48d0ce40
+		summarizeBy: none
+		sourceColumn: code
+
+		annotation SummarizationSetBy = Automatic
+
+	column forename
+		dataType: string
+		lineageTag: 52729eb0-5d6d-4eae-8d0d-5c7d9e7accac
+		summarizeBy: none
+		sourceColumn: forename
+
+		annotation SummarizationSetBy = Automatic
+
+	column surname
+		dataType: string
+		lineageTag: 69dffdb2-a163-436d-af5b-dccc34198e79
+		summarizeBy: none
+		sourceColumn: surname
+
+		annotation SummarizationSetBy = Automatic
+
+	column dob
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: ed7318a2-f5cd-4fc3-bb19-3541d7cd5054
+		summarizeBy: none
+		sourceColumn: dob
+
+		variation Variation
+			isDefault
+			relationship: da4ee77c-ddf6-4d99-a668-2d48be3b1af5
+			defaultHierarchy: LocalDateTable_a04c0c6e-1941-4298-b27a-dac62b913fe4.'Hierarquia de datas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column nationality
+		dataType: string
+		lineageTag: 6721da23-eb09-409a-88c1-159e5a084b7f
+		summarizeBy: none
+		sourceColumn: nationality
+
+		annotation SummarizationSetBy = Automatic
+
+	column url
+		dataType: string
+		lineageTag: c62edb1b-a260-4d22-ac47-b380d00171f2
+		summarizeBy: none
+		sourceColumn: url
+
+		annotation SummarizationSetBy = Automatic
+
+	column fullname
+		dataType: string
+		lineageTag: 0e000f1e-e0b5-4622-94d1-849a625e1c74
+		summarizeBy: none
+		sourceColumn: fullname
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Short Name' = LEFT(drivers[forename], 1) & ". " & drivers[surname]
+		lineageTag: 55d4c4ad-480b-46fe-88d9-8a7dffdc0641
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation __PBI_SemanticLinks = [{"LinkTarget":{"TableName":"drivers","TableItemName":"Short Name (grupos)","ObjectType":4},"LinkType":"UsedInGroup"}]
+
+	column 'Short Name (grupos)' =
+			SWITCH(
+				TRUE,
+				ISBLANK('drivers'[Short Name]),
+				"(Em branco)",
+				'drivers'[Short Name] IN {"L. Hamilton"},
+				"L. Hamilton",
+				"Outro"
+			)
+		lineageTag: d8228522-9ea0-49ac-a771-cefc64d63876
+		summarizeBy: none
+
+		extendedProperty GroupingMetadata =
+				{
+				  "version": 0,
+				  "groupedColumns": [
+				    {
+				      "Column": {
+				        "Expression": {
+				          "SourceRef": {
+				            "Entity": "drivers"
+				          }
+				        },
+				        "Property": "Short Name"
+				      }
+				    }
+				  ]
+				}
+
+		annotation GroupingDesignState = {"Version":0,"Sources":[{"Name":"d","Entity":"drivers"}],"GroupedColumns":[{"Column":{"Expression":{"SourceRef":{"Source":"d"}},"Property":"Short Name"}}],"GroupItems":[{"DisplayName":"(Em branco)","BlankDefaultPlaceholder":true},{"DisplayName":"L. Hamilton","Expression":{"In":{"Expressions":[{"Column":{"Expression":{"SourceRef":{"Source":"d"}},"Property":"Short Name"}}],"Values":[[{"Literal":{"Value":"'L. Hamilton'"}}]]}}},{"DisplayName":"Outro"}]}
+
+		annotation SummarizationSetBy = Automatic
+
+	partition drivers = m
+		mode: import
+		source =
+				let
+				    Fonte = Csv.Document(File.Contents("D:\Study\Portfolio_BI\Formula 1 Race Data\dataset\drivers.csv"),[Delimiter=",", Columns=9, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+				    #"Cabeçalhos Promovidos" = Table.PromoteHeaders(Fonte, [PromoteAllScalars=true]),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(#"Cabeçalhos Promovidos",{{"driverId", Int64.Type}, {"driverRef", type text}, {"number", type text}, {"code", type text}, {"forename", type text}, {"surname", type text}, {"dob", type date}, {"nationality", type text}, {"url", type text}}),
+				    #"Valor Substituído" = Table.ReplaceValue(#"Tipo Alterado","\N","",Replacer.ReplaceText,{"number"}),
+				    #"Valor Substituído1" = Table.ReplaceValue(#"Valor Substituído","\N","",Replacer.ReplaceText,{"code"}),
+				    #"Tipo Alterado1" = Table.TransformColumnTypes(#"Valor Substituído1",{{"number", Int64.Type}, {"code", type text}}),
+				    #"Personalização Adicionada" = Table.AddColumn(#"Tipo Alterado1", "fullname", each Text.Combine({[forename], [surname]}," ")),
+				    #"Colunas Reordenadas" = Table.ReorderColumns(#"Personalização Adicionada",{"driverId", "driverRef", "number", "code", "forename", "surname", "fullname", "dob", "nationality", "url"})
+				in
+				    #"Colunas Reordenadas"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navegação
+

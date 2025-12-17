@@ -1,0 +1,68 @@
+table lap_times
+	lineageTag: d999b40c-fd55-4a19-96cc-a41bba750a64
+
+	column raceId
+		dataType: int64
+		formatString: 0
+		lineageTag: 353bf357-da69-413b-b760-08f575eba534
+		summarizeBy: none
+		sourceColumn: raceId
+
+		annotation SummarizationSetBy = Automatic
+
+	column driverId
+		dataType: int64
+		formatString: 0
+		lineageTag: dd0b0315-12cf-47df-ace6-36b376a8664d
+		summarizeBy: none
+		sourceColumn: driverId
+
+		annotation SummarizationSetBy = Automatic
+
+	column lap
+		dataType: int64
+		formatString: 0
+		lineageTag: a74442ad-ba07-4a4b-83d4-e5e238920489
+		summarizeBy: sum
+		sourceColumn: lap
+
+		annotation SummarizationSetBy = Automatic
+
+	column position
+		dataType: int64
+		formatString: 0
+		lineageTag: e53a54a1-3044-4633-8a25-e523ef6403b3
+		summarizeBy: sum
+		sourceColumn: position
+
+		annotation SummarizationSetBy = Automatic
+
+	column time
+		dataType: string
+		lineageTag: f69a2ac9-7113-4c22-a2ef-c43c856c1442
+		summarizeBy: none
+		sourceColumn: time
+
+		annotation SummarizationSetBy = Automatic
+
+	column milliseconds
+		dataType: int64
+		formatString: 0
+		lineageTag: 2862a143-fa6a-4c28-82a9-8346a6f6adaf
+		summarizeBy: sum
+		sourceColumn: milliseconds
+
+		annotation SummarizationSetBy = Automatic
+
+	partition lap_times = m
+		mode: import
+		source =
+				let
+				    Fonte = Csv.Document(File.Contents("D:\Study\Portfolio_BI\Formula 1 Race Data\dataset\lap_times.csv"),[Delimiter=",", Columns=6, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    #"Cabeçalhos Promovidos" = Table.PromoteHeaders(Fonte, [PromoteAllScalars=true]),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(#"Cabeçalhos Promovidos",{{"raceId", Int64.Type}, {"driverId", Int64.Type}, {"lap", Int64.Type}, {"position", Int64.Type}, {"time", type text}, {"milliseconds", Int64.Type}})
+				in
+				    #"Tipo Alterado"
+
+	annotation PBI_ResultType = Table
+

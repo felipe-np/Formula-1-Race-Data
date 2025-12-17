@@ -1,0 +1,79 @@
+table driver_standings
+	lineageTag: faa804bc-ccd9-4e3b-a476-024992b1e179
+
+	column driverStandingsId
+		dataType: int64
+		formatString: 0
+		lineageTag: a5bec536-cc66-42c1-ac52-b47583707626
+		summarizeBy: count
+		sourceColumn: driverStandingsId
+
+		annotation SummarizationSetBy = Automatic
+
+	column raceId
+		dataType: int64
+		formatString: 0
+		lineageTag: ad2e5c82-f0f6-4447-b655-77187689ed97
+		summarizeBy: none
+		sourceColumn: raceId
+
+		annotation SummarizationSetBy = Automatic
+
+	column driverId
+		dataType: int64
+		formatString: 0
+		lineageTag: 78ff907a-73d4-4431-b993-81e3c4ff26cf
+		summarizeBy: none
+		sourceColumn: driverId
+
+		annotation SummarizationSetBy = Automatic
+
+	column points
+		dataType: int64
+		formatString: 0
+		lineageTag: 3f420203-a3a6-47ff-8f06-9b1aa58bb1cd
+		summarizeBy: sum
+		sourceColumn: points
+
+		annotation SummarizationSetBy = Automatic
+
+	column position
+		dataType: int64
+		formatString: 0
+		lineageTag: 176ccb13-2e6b-4ea7-b1e8-c5c0c4f73198
+		summarizeBy: sum
+		sourceColumn: position
+
+		annotation SummarizationSetBy = Automatic
+
+	column positionText
+		dataType: string
+		lineageTag: 1f7a5720-429c-4d57-bd86-1fc4b3d6bd88
+		summarizeBy: none
+		sourceColumn: positionText
+
+		annotation SummarizationSetBy = Automatic
+
+	column wins
+		dataType: int64
+		formatString: 0
+		lineageTag: 43bd2e7a-1676-4d7f-bb7c-094eac3cdc7f
+		summarizeBy: sum
+		sourceColumn: wins
+
+		annotation SummarizationSetBy = Automatic
+
+	partition driver_standings = m
+		mode: import
+		source =
+				let
+				    Fonte = Csv.Document(File.Contents("D:\Study\Portfolio_BI\Formula 1 Race Data\dataset\driver_standings.csv"),[Delimiter=",", Columns=7, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    #"Cabeçalhos Promovidos" = Table.PromoteHeaders(Fonte, [PromoteAllScalars=true]),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(#"Cabeçalhos Promovidos",{{"driverStandingsId", Int64.Type}, {"raceId", Int64.Type}, {"driverId", Int64.Type}, {"points", Int64.Type}, {"position", Int64.Type}, {"positionText", type text}, {"wins", Int64.Type}})
+				in
+				    #"Tipo Alterado"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navegação
+

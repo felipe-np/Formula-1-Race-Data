@@ -1,0 +1,158 @@
+table 'Other Metrics'
+	lineageTag: 1787041c-66d6-45cc-a4a7-6fc280e90b97
+
+	measure 'Total Host Countries' = DISTINCTCOUNT(circuits[country])
+		formatString: 0
+		lineageTag: d982edc7-bcd7-4da9-818b-2babb2149e94
+
+	measure 'Record Speed (km/h)' =
+			
+			MAX(results[fastestLapSpeed])
+		lineageTag: e8aac619-3674-4b07-9073-e16780cca409
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Record Time' = ```
+			
+			CALCULATE(
+			    MIN(results[fastestLapTime]),
+			    results[fastestLapTime] <> ""  
+			)
+			```
+		lineageTag: 3e983c4b-0e8f-4f3e-9355-35f2bc6920b5
+
+	measure 'Record Details Time' = ```
+			
+			VAR MinimumTime = [Record Time] 
+			
+			VAR NamePilot = 
+			    CALCULATE(
+			        SELECTEDVALUE(drivers[surname]), 
+			        FILTER(results, results[fastestLapTime] = MinimumTime)
+			    )
+			
+			VAR YearRace = 
+			    CALCULATE(
+			        SELECTEDVALUE(races[year]), 
+			        FILTER(results, results[fastestLapTime] = MinimumTime)
+			    )
+			
+			RETURN
+			    IF(
+			        ISBLANK(MinimumTime), 
+			        "N/A", 
+			        MinimumTime & " | " & NamePilot & " (" & YearRace & ")"
+			    )
+			```
+		lineageTag: e82bfb6f-d1fc-4cf2-846e-6842c11c8a5d
+
+	measure 'Record Details Speed' = ```
+			
+			VAR SpeedRecord = [Record Speed (km/h)] 
+			
+			VAR NamePilot = 
+			    CALCULATE(
+			        SELECTEDVALUE(drivers[surname]), 
+			        FILTER(results, results[fastestLapSpeed] = SpeedRecord)
+			    )
+			
+			VAR YearRace = 
+			    CALCULATE(
+			        SELECTEDVALUE(races[year]), 
+			        FILTER(results, results[fastestLapSpeed] = SpeedRecord)
+			    )
+			
+			RETURN
+			    IF(
+			        ISBLANK(SpeedRecord), 
+			        "N/A", 
+			        SpeedRecord & " km/h | " & NamePilot & " (" & YearRace & ")"
+			    )
+			```
+		lineageTag: 0f2769c5-218a-4a3c-9528-0a00cc3e8ce1
+
+	measure 'Record Speed (km/h) tooltip' =
+			
+			FORMAT(MAX(results[fastestLapSpeed]), "0.00") & " km/h"
+		lineageTag: b1accc48-c96a-4ed0-892f-6cb428ece41a
+
+	measure 'Total GPs' =
+			
+			COUNT(races[raceId]) & " GPs"
+		lineageTag: 772c6eb8-1a10-4dd2-baa9-64dc101bc4bf
+
+	measure 'Cumulative Points' =
+			
+			VAR CurrentRound = MAX(races[round])
+			VAR CurrentYear = MAX(races[year])
+			
+			RETURN
+			CALCULATE(
+			    SUM(results[points]),
+			    FILTER(
+			        ALLSELECTED(races), -- Keeps the context of the selected Year
+			        races[year] = CurrentYear &&
+			        races[round] <= CurrentRound -- Sums everything up to the current race
+			    )
+			)
+		formatString: 0
+		lineageTag: 4d10b512-1222-4fd2-8094-63667bf7476f
+
+	measure 'Avg Pit Stop Time (sec)' =
+			
+			CALCULATE(
+			    AVERAGE(pit_stops[milliseconds]) / 1000,
+			    pit_stops[milliseconds] < 60000 // Ignore tops with more than 60s to remove noise
+			)
+		formatString: 0.00
+		lineageTag: 5e417891-cf86-46d3-bf27-aa34f5488b18
+
+	measure 'Team Color' = ```
+			
+			VAR CurrentTeam = SELECTEDVALUE(constructors[name])
+			
+			RETURN SWITCH( TRUE(),
+			    -- Big 4 (Current Era)
+			    CurrentTeam = "Ferrari", "#DC0000",      -- Ferrari Red
+			    CurrentTeam = "McLaren", "#FF8700",      -- Papaya Orange
+			    CurrentTeam = "Red Bull", "#061D41",     -- Navy Blue (or #1E41FF for lighter blue)
+			    CurrentTeam = "Mercedes", "#00D2BE",     -- Silver/Petronas Green
+			
+			    -- Historic & Midfield
+			    CurrentTeam = "Williams", "#005AFF",     -- Royal Blue
+			    CurrentTeam = "Alpine", "#0090FF",       -- Alpine Blue
+			    CurrentTeam = "Renault", "#FFF500",      -- Renault Yellow
+			    CurrentTeam = "Aston Martin", "#006F62", -- British Racing Green
+			    CurrentTeam = "Lotus", "#FFB800",        -- Camel Yellow (Senna Era) or #004225
+			    CurrentTeam = "Benetton", "#00A204",     -- Benetton Green
+			    CurrentTeam = "Tyrrell", "#001F7D",      -- Dark Blue
+			    CurrentTeam = "Brabham", "#182846",      -- Brabham Blue
+			    CurrentTeam = "AlphaTauri", "#2B4562",   -- Navy/White
+			    CurrentTeam = "RB", "#1633D4",           -- Visa CashApp Blue
+			    CurrentTeam = "Toro Rosso", "#0032FF",   -- Electric Blue
+			    CurrentTeam = "Haas", "#B6BABD",         -- Grey/White
+			    CurrentTeam = "Alfa Romeo", "#900000",   -- Dark Red
+			    CurrentTeam = "Sauber", "#006EFF",       -- Sauber Blue (or #52E252 for Kick Green)
+			    CurrentTeam = "Jordan", "#F5D033",       -- Yellow
+			    CurrentTeam = "Brawn", "#B8FD6E",        -- Neon Green
+			
+			    -- Fallback color for others
+			    "#A0A0A0" 
+			)
+			```
+		lineageTag: 95b1e76d-fef0-4d9f-ac3d-defad8cb66d4
+
+	partition 'Other Metrics' = m
+		mode: import
+		source =
+				let
+				    Fonte = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i44FAA==", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [#"Coluna 1" = _t]),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(Fonte,{{"Coluna 1", type text}}),
+				    #"Colunas Removidas" = Table.RemoveColumns(#"Tipo Alterado",{"Coluna 1"})
+				in
+				    #"Colunas Removidas"
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+

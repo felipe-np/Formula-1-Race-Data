@@ -1,0 +1,38 @@
+model Model
+	culture: pt-BR
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: pt-BR
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation PBI_QueryOrder = ["circuits","constructor_results","constructor_standings","constructors","driver_standings","drivers","lap_times","pit_stops","qualifying","races","results","seasons","sprint_results","status","Driver Metrics","Teams Metrics","Other Metrics","circuits_img"]
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table circuits
+ref table constructor_results
+ref table constructor_standings
+ref table constructors
+ref table driver_standings
+ref table drivers
+ref table DateTableTemplate_21809891-7fdd-4bf3-8a15-85432b3966ef
+ref table LocalDateTable_a04c0c6e-1941-4298-b27a-dac62b913fe4
+ref table lap_times
+ref table qualifying
+ref table races
+ref table LocalDateTable_1d261d15-18d8-404c-bf03-3bfe451f81d8
+ref table results
+ref table seasons
+ref table sprint_results
+ref table status
+ref table pit_stops
+ref table 'Driver Metrics'
+ref table 'Teams Metrics'
+ref table 'Other Metrics'
+ref table circuits_img
+
+ref cultureInfo pt-BR
+

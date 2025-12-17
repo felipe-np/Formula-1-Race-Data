@@ -1,0 +1,10 @@
+# Ignorar arquivos de cache e dados locais do Power BI
+*.abf
+*.pbi/localSettings.json
+*.pbi/cache.abf
+.pbi/
+*.pbix
+
+# Ignorar arquivos temporários do sistema
+.DS_Store
+Thumbs.db

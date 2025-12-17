@@ -1,0 +1,97 @@
+table 'Teams Metrics'
+	lineageTag: 1a92e4ac-5c66-4fc8-9ce4-4ff6eccfddaf
+
+	measure 'Total WCC Titles' = ```
+			
+			VAR LastRaces = 
+			    CALCULATETABLE(
+			        VALUES(races[raceId]),
+			        FILTER(
+			            ALL(races),
+			            races[round] = CALCULATE(MAX(races[round]), ALLEXCEPT(races, races[year]))
+			        )
+			    )
+			RETURN
+			    CALCULATE(
+			        COUNTROWS(constructor_standings),
+			        constructor_standings[position] = 1,      -- Finished 1º
+			        constructor_standings[raceId] IN LastRaces -- At lat race of the year
+			    )
+			```
+		formatString: 0
+		lineageTag: ee272c68-9f7c-4f72-9163-bacf831348e9
+
+	measure 'Total 1-2 Finishes' = ```
+			
+			VAR RacesWithP1 = 
+			    CALCULATETABLE(
+			        VALUES(results[raceId]), 
+			        results[positionOrder] = 1
+			    )
+			VAR RacesWithP2 = 
+			    CALCULATETABLE(
+			        VALUES(results[raceId]), 
+			        results[positionOrder] = 2
+			    )
+			RETURN
+			    COUNTROWS(
+			        INTERSECT(RacesWithP1, RacesWithP2) -- Count only races that showed in both lists
+			    )
+			```
+		formatString: 0
+		lineageTag: d0fd71c6-350a-4550-9023-7597dbd18d1f
+
+	measure 'Team Win %' = ```
+			
+			VAR TeamWins = [Total Wins] -- Aproveitando sua medida existente
+			VAR TeamRaces = 
+			    CALCULATE(
+			        DISTINCTCOUNT(results[raceId]), -- Conta corridas únicas
+			        results[constructorId] <> BLANK() -- Garante que a equipe participou
+			    )
+			RETURN
+			    DIVIDE(TeamWins, TeamRaces, 0)
+			```
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: f905eab9-539c-42c8-8f10-d814d16abbef
+
+	measure 'Total Victories' =
+			
+			CALCULATE(
+			    COUNTROWS(results),
+			    results[positionOrder] = 1
+			)
+		formatString: 0
+		lineageTag: 9f5ae9e3-b0b6-474e-bcbd-972907ca2cf1
+
+	measure 'WCC Position' = ```
+			
+			VAR _LastRaceOfTheYear = MAX(races[raceId]) 
+			-- No contexto do gráfico (que separa por ano), isso pega o ID da última corrida daquele ano.
+			
+			RETURN
+			CALCULATE(
+			    MAX(constructor_standings[position]),
+			    constructor_standings[raceId] = _LastRaceOfTheYear
+			)
+			```
+		lineageTag: e29494d4-891b-4026-9437-775215721bd1
+
+		formatStringDefinition = "0""º"
+
+	measure 'Total Team GPS' = DISTINCTCOUNT(results[raceId])
+		formatString: 0
+		lineageTag: 1f50731d-0b94-40ef-bdd2-296cad66221f
+
+	partition 'Teams Metrics' = m
+		mode: import
+		source =
+				let
+				    Fonte = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i44FAA==", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [#"Coluna 1" = _t]),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(Fonte,{{"Coluna 1", type text}}),
+				    #"Colunas Removidas" = Table.RemoveColumns(#"Tipo Alterado",{"Coluna 1"})
+				in
+				    #"Colunas Removidas"
+
+	annotation PBI_ResultType = Table
+
