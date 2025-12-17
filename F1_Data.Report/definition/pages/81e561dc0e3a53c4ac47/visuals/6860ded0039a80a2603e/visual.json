@@ -3,9 +3,9 @@
   "name": "6860ded0039a80a2603e",
   "position": {
     "x": 0,
-    "y": 189.66565349544075,
+    "y": 185.77507598784194,
     "z": 9000,
-    "height": 207.17325227963528,
+    "height": 211.06382978723406,
     "width": 244.13373860182372,
     "tabOrder": 5000
   },
@@ -750,6 +750,20 @@
             }
           ]
         }
+      },
+      {
+        "name": "15fbf137af5303f14395",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Driver Metrics"
+              }
+            },
+            "Property": "Total Titles"
+          }
+        },
+        "type": "Advanced"
       }
     ]
   }
